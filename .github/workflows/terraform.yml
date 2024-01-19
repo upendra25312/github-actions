@@ -26,8 +26,10 @@ jobs:
 
     steps:
     # Checkout the repository to the GitHub Actions runner
+    - name: print path
+      run: echo 'path ::${{github.workspace}}/${{ inputs.ROOT_PATH }}'
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -38,7 +40,7 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-      working-directory: ${{env.ROOT_PATH}}
+      working-directory: ${{github.workspace}}${{ inputs.ROOT_PATH }}
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
@@ -47,4 +49,4 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
-      working-directory: ${{env.ROOT_PATH}}
+      working-directory: ${{github.workspace}}${{ inputs.ROOT_PATH }}
