@@ -3,8 +3,18 @@ name: 'tf deploy to azure'
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "/GitHubActions/src\terraform/*" 
   pull_request:
-
+    branches:
+      - main
+  workflow_dispatch: #this attribute will enable the manual run to the pipeline
+  workflow_call:
+    inputs:
+      ROOT_PATH:
+        type: string
+        required: true
+   
 env: 
   ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
   ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
