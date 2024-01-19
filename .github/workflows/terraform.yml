@@ -14,7 +14,7 @@ on:
       ROOT_PATH:
         type: string
         required: true
-   
+   #new comment
 env: 
   ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
   ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
